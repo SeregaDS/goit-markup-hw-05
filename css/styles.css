@@ -608,26 +608,18 @@ img {
 
 .privelege-list {
   display: flex;
-}
-
-.privelege-item .icon-link {
-  width: 70px;
-  height: 70px;
+  justify-content: center;
 }
 
 .privelege-item .icon {
+  width: 270px;
+  height: 120px;
+  margin-bottom: 30px;
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   background-color: var(--bgc-secondary);
   border-radius: 4px;
-
-  padding-top: 25px;
-  padding-bottom: 25px;
-  padding-left: 100px;
-  padding-right: 100px;
-
-  margin-bottom: 30px;
 }
 
 .privelege-item:not(:last-child) {
