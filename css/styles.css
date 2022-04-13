@@ -34,6 +34,11 @@
   --company-color: #afb1b8;
   --hover-social: #ffffff;
   --bgc-icon-footer: rgba(255, 255, 255, 0.1);
+  --promo-overlay-bcg: rgba(47, 48, 58, 0.8);
+  --modal-backdrop: rgba(0, 0, 0, 0.2);
+  --modal-bgc: #ffffff;
+  --cases-overlay-bgc: rgba(33, 150, 243, 0.9);
+  --typical-cubic: cubic-bezier(0.4, 0, 0.2, 1);
   --typical-gap: 10px;
 }
 
@@ -45,6 +50,7 @@ html {
 *::before,
 *::after {
   box-sizing: inherit;
+  user-select: none;
 }
 
 h1,
@@ -107,6 +113,10 @@ img {
   padding-top: 32px;
   padding-bottom: 32px;
   display: block;
+
+  transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: var(--typical-cubic);
 }
 
 .nav {
@@ -131,6 +141,11 @@ img {
 }
 
 .contact .link {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  display: flex;
+  align-items: center;
+
   font-size: 14px;
   line-height: 1.14;
   font-weight: 500;
@@ -138,10 +153,9 @@ img {
   color: var(--secondary-text-color);
   text-decoration: none;
 
-  padding-top: 32px;
-  padding-bottom: 32px;
-  display: flex;
-  align-items: center;
+  transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: var(--typical-cubic);
 }
 
 .contact-item .icon-link {
@@ -238,6 +252,7 @@ img {
   justify-content: center;
   align-items: center;
   background-color: var(--bgc-icon-footer);
+  transition: 250ms background-color var(--typical-cubic);
 }
 
 .social-link-footer:hover,
@@ -254,12 +269,18 @@ img {
   color: var(--footer-adress-color);
   text-decoration: none;
   font-style: normal;
+  transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: var(--typical-cubic);
 }
 
 .footer-adress-list-item-adress {
   color: var(--text-white-color);
   text-decoration: none;
   font-style: normal;
+  transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: var(--typical-cubic);
 }
 
 .footer-adress a:focus,
@@ -303,6 +324,17 @@ img {
   padding: 6px 22px;
   border-width: 0;
   border-radius: 4px;
+  transition-property: background-color, color, box-shadow;
+  transition-duration: 250ms;
+  transition-timing-function: var(--typical-cubic);
+}
+
+.buttons-filter:focus,
+.buttons-filter:hover {
+  background-color: var(--action-color);
+  color: var(--text-white-color);
+  box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
+    0px 2px 2px rgba(0, 0, 0, 0.12);
 }
 
 .buttons {
@@ -314,6 +346,8 @@ img {
 .btn-filter:not(:first-child) {
   margin-left: 8px;
 }
+
+/* cases */
 
 .cases-card .cases-item-title {
   font-size: 18px;
@@ -345,6 +379,8 @@ img {
 .cases-card {
   display: block;
   text-decoration: none;
+  box-shadow: none;
+  transition: 250ms box-shadow var(--typical-cubic);
 }
 
 .cases-card:hover,
@@ -362,6 +398,35 @@ img {
   border-bottom: 1px solid var(--bgc-item-hover);
   border-left: 1px solid var(--bgc-item-hover);
   border-right: 1px solid var(--bgc-item-hover);
+}
+
+.cases-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.cases-image .cases-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding-left: 24px;
+  padding-right: 24px;
+  display: flex;
+  align-items: center;
+  background-color: var(--cases-overlay-bgc);
+  transform: translateY(0);
+  transition: 250ms transform var(--typical-cubic);
+}
+
+.cases-card:focus .cases-overlay,
+.cases-card:hover .cases-overlay {
+  transform: translateY(-100%);
+}
+
+.cases-image .overlay-text {
+  font-size: 18px;
+  line-height: 1.56;
+  color: var(--text-white-color);
 }
 
 .hero {
@@ -396,20 +461,68 @@ img {
   cursor: pointer;
   background-color: var(--action-color);
   letter-spacing: 0.06em;
-  font-family: inherit;
   font-weight: 700;
   color: var(--text-white-color);
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   display: block;
   width: 200px;
   height: 50px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   border-width: 0;
+  transition: 250ms background-color var(--typical-cubic);
 }
+
 .hero-button:hover,
 .hero-button:focus {
   background-color: var(--hero-button-hover);
+}
+
+/* Modal */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--modal-backdrop);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  min-width: 528px;
+  min-height: 581px;
+
+  background-color: var(--modal-bgc);
+  border-radius: 4px;
+}
+
+.modal .close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bgc-main);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  fill: #000000;
+  cursor: pointer;
 }
 
 .section-title {
@@ -475,6 +588,9 @@ img {
   border-radius: 50%;
   justify-content: center;
   align-items: center;
+  transition-property: background-color, color;
+  transition-duration: 250ms;
+  transition-timing-function: var(--typical-cubic);
 }
 
 .social-link:hover,
@@ -539,6 +655,30 @@ img {
   display: flex;
 }
 
+.promo-image {
+  position: relative;
+}
+
+.promo-list-item .overlay {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  background-color: var(--promo-overlay-bcg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.promo-list-item .text {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  text-transform: uppercase;
+  color: var(--text-white-color);
+}
+
 .promo-list-item:not(:last-child) {
   margin-right: 30px;
 }
@@ -554,14 +694,6 @@ img {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
   margin: -1px;
-}
-
-.buttons-filter:focus,
-.buttons-filter:hover {
-  background-color: var(--action-color);
-  color: var(--text-white-color);
-  box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
-    0px 2px 2px rgba(0, 0, 0, 0.12);
 }
 
 /* client */
@@ -590,6 +722,9 @@ img {
   border: 1px solid var(--company-color);
   border-radius: 4px;
   color: var(--company-color);
+  transition-property: border-color, color;
+  transition-duration: 250ms;
+  transition-timing-function: var(--typical-cubic);
 }
 
 .clients .item:hover,
