@@ -319,9 +319,8 @@ img {
   padding: 6px 22px;
   border-width: 0;
   border-radius: 4px;
-  transition: var(--typical-transition-background);
-  transition: var(--typical-transition-color);
-  transition: var(--typical-transition-boxshadow);
+  transition: var(--typical-transition-background), var(--typical-transition-color),
+    var(--typical-transition-boxshadow);
 }
 
 .buttons-filter:focus,
@@ -595,8 +594,7 @@ img {
   border-radius: 50%;
   justify-content: center;
   align-items: center;
-  transition: var(--typical-transition-background);
-  transition: var(--typical-transition-color);
+  transition: var(--typical-transition-background), var(--typical-transition-color);
 }
 
 .social-link:hover,
@@ -721,8 +719,7 @@ img {
   border-radius: 4px;
   color: var(--company-color);
 
-  transition: var(--typical-transition-color);
-  transition: border-color 250ms var(--typical-cubic);
+  transition: var(--typical-transition-color), border-color 250ms var(--typical-cubic);
 }
 
 .clients .item:hover,
