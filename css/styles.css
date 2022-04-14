@@ -42,7 +42,7 @@
   --typical-gap: 10px;
   --typical-transition-color: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
   --typical-transition-background: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --typical-transition-boxshadow: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --typical-transition-boxshadow: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 html {
